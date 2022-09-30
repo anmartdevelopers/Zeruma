@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shamba bid</title>
+    <link rel="stylesheet" href="src/leaflet.css" />
+    <link rel="stylesheet" href="src/css/bootstrap.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://use.fontawesome.com/e075449986.js"></script>
+    <link rel="stylesheet" href="css/map.css" />
+    <script src="src/leaflet.js"></script>
+    <script src="src/jquery-3.6.1.min.js"></script>
+    <script src="src/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="src/jquery-ui.min.css
+    ">
+    <!-- data shapefile ins cript form -->
+
+    <!-- leaflet css -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+
+    <!-- leaflet js -->
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <!-- ajax -->
+    <script src="src/plugins/ajax/leaflet.ajax.min.js"></script>
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <a class="navbar-brand" href="index.html">
+        <!-- logo image -->
+        <img
+          src="img/logo.PNG"
+          width="90"
+          alt=""
+          lass="d-inline-block align-middle mr-2"
+        />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <!-- search box for searching for the lpercel of interest -->
+          <form class="form-inline">
+            <input
+              class="form-control me-5"
+              type="search"
+              id="txtFindLand"
+              placeholder="City,County, province,Town"
+              aria-label="Search"
+            />
+          </form>
+          <button class="btn btn-primary btn-block" id="btnFindLand">
+            Search
+          </button>
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html"
+              >Home <span class="sr-only"></span
+            ></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Map.html">Map</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Newplots.html">New Plots</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="bid.html">BID</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="deals.html">Deals</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="exclusive.html">Exclusive</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Contact.html">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Help.html">Help</a>
+          </li>
+          <div class="vr">|</div>
+          <li class="nav-item" id="listing">
+            <a class="nav-link text-success" href="listing.html">
+              + List Your Property</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- end of navigation bar -->
+    <!-- <div class="container"> -->
+    <div class="row">
+      <!-- the Filter region -->
+      <div class="col-md-3" id="side-bar">
+        <div class="container">
+          <div class="row row1">
+            <h4>Cartegory</h4>
+            <div class="form-check custom-control-input">
+              <input
+                class="form-check-input"
+                name="fltType"
+                type="checkbox"
+                value="Farming"
+                id="flexCheckDefault"
+                checked
+              /> Farming  
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                name="fltType"
+                type="checkbox"
+                value="Residential"
+                id="flexCheckChecked"
+              /> Residential
+            
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                name="fltType"
+                type="checkbox"
+                value="Apartments"
+                id="flexCheckChecked"
+              />Apartments
+              
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                name="fltType"
+                type="checkbox"
+                value="Ranching"
+                id="flexCheckChecked"
+              />Ranching
+            </div>
+            <button id="btnFilterType" class="btn btn-success">Apply Filter</button>
+          </div>
+          <hr class="mt-2 mb-3" />
+          <div class="row row2">
+            <label for="customRange2" class="form-label">Price range</label>
+            <input
+              type="range"
+              class="form-range"
+              min="0"
+              max="50"
+              id="customRange2"
+            />
+          </div>
+          <hr class="mt-2 mb-3" />
+          <div class="row row3">
+            <div class="form-check">
+              <h4>Land Size</h4>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="50by100"
+                id="flexCheckDefault"
+                name="fltLSize"
+                checked
+              />50 * 100
+              
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="40by80"
+                id="flexCheckChecked"
+                name="fltLSize"
+                checked
+              />40 * 80
+              
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="oneAcre"
+                id="flexCheckChecked"
+                name="fltLSize"
+                checked
+              />1 Acre
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="twoAcre"
+                id="flexCheckChecked"
+                name="fltLSize"
+                checked
+              />2 Acre
+            </div>
+            <button id="btnFilterSizes" class="btn btn-success">Apply Filter</button>
+          </div>
+          <hr class="mt-2 mb-3" />
+          <div class="row row4">
+            <div class="form-check">
+              <h4>Purchase method</h4>
+              <input
+                class="form-check-input"
+                type="radio"
+                name="fltpay"
+                id="flexRadioDisabled"
+                value="ALL"
+                checked
+              />All
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="fltpay"
+                id="flexRadioCheckedDisabled"
+                value="INSTALLMENT"
+              />Installment
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="fltpay"
+                id="flexRadioCheckedDisabled"
+                value="BANK"
+              />Bank
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="fltpay"
+                id="flexRadioCheckedDisabled"
+                value="CASH"
+              />Cash
+            </div>
+          </div>
+          <hr class="mt-2 mb-3" />
+          <div class="row row5">
+            <button id="btnFilterall" class="btn btn-success">Apply Filter</button>
+          </div>
+        </div>
+      </div>
+      <!-- Filter region display -->
+      <div class="col-3">
+        <!-- Search functionality -->
+        <div id="divSearch" class="col-xs-12">
+          <div class="errorMesg col-xs-12" id="divLandError"></div>
+        </div>
+        <section class="section-products">
+          <div class="container-fluid overflow-hidden">
+            <div class="row ">
+                <!-- Single Product -->
+						<div class="col-md-6 col-lg-4 col-xl-6 ">
+                            <div id="product-1" class="single-product">
+                                    <div class="part-1">
+                                            <ul>
+                                                    <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-plus"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-expand"></i></a></li>
+                                            </ul>
+                                    </div>
+                                    <div class="part-2">
+                                            <h3 class="product-title">50*100 (Urban setup)</h3>
+                                            <h4 class="product-old-price">KSH 250,000</h4>
+                                            <h4 class="product-price">KSH 210,000</h4>
+                                    </div>
+                            </div>
+
+            </div>
+            <!-- Single Product -->
+						<div class="col-md-6 col-lg-4 col-xl-6">
+                            <div id="product-2" class="single-product">
+                                    <div class="part-1">
+                                            <span class="discount">15% off</span>
+                                            <ul>
+                                                    <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-plus"></i></a></li>
+                                                    <li><a href="#"><i class="fas fa-expand"></i></a></li>
+                                            </ul>
+                                    </div>
+                                    <div class="part-2">
+                                            <h3 class="product-title">40*80 (Community)</h3>
+                                            <h4 class="product-old-price">KSH 850,000</h4>
+                                            <h4 class="product-price">KSH 750,000</h4>
+                                    </div>
+                            </div>
+                    </div>
+          </div>
+          <div class="row ">
+            <!-- Single Product -->
+            <div class="col-md-6 col-lg-4 col-xl-6">
+                <div id="product-2" class="single-product">
+                        <div class="part-1">
+                                <span class="discount">34% off</span>
+                                <ul>
+                                        <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                                        <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fas fa-plus"></i></a></li>
+                                        <li><a href="#"><i class="fas fa-expand"></i></a></li>
+                                </ul>
+                        </div>
+                        <div class="part-2">
+                                <h3 class="product-title">40*80 (Community)</h3>
+                                <h4 class="product-old-price">KSH 850,000</h4>
+                                <h4 class="product-price">KSH 750,000</h4>
+                        </div>
+                </div>
+        </div>
+            <!-- Single Product -->
+                    <div class="col-md-6 col-lg-4 col-xl-6 ">
+                        <div id="product-1" class="single-product">
+                                <div class="part-1">
+                                        <ul>
+                                                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                                                <li><a href="#"><i class="fas fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fas fa-plus"></i></a></li>
+                                                <li><a href="#"><i class="fas fa-expand"></i></a></li>
+                                        </ul>
+                                </div>
+                                <div class="part-2">
+                                        <h3 class="product-title">50*100 (Urban setup)</h3>
+                                        <h4 class="product-old-price">KSH 250,000</h4>
+                                        <h4 class="product-price">KSH 210,000</h4>
+                                </div>
+                        </div>
+
+        </div>
+        
+      </div>
+        </section>
+      </div>
+      <!-- end of items display cartegory -->
+      <!-- map region where magic happens Completed-->
+      <div class="col-md-6" id="map"></div>
+    </div>
+    <!-- </div> -->
+    <script src="js/map.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
